@@ -32,17 +32,21 @@ function setupInitialValues() {
 function update() {
 const values = getCurrentUIValues();
 const P = values.amount;
-const i = values.rate /12;
+const i = values.rate /12/100;
 const n = 12 * values.years;
 console.log(P, i, n);
 // console.log(i*(1+i)**n);
 // console.log((1+i)**n - 1);
  //const payment = P * (((i*(1+i)**n)) / ((1+i)**n - 1));
- const payment = (P * i) / (1 - ((1+i)**(-n)));
- console.log(payment);
-// console.log(values.amount);
-// console.log(values.years);
-// console.log(values.rate);
+//  const payment = (P * i ) / (1 - ((1+i)**(-n)));
+const payment = ((P*i*Math.pow(1+i,n)) / (Math.pow(1+i, n)-1)).toFixed(2); 
+console.log(payment);
+//Showing the payment after clicking the calculate button.
+const parent = document.querySelector('#monthly-payment');
+const div = document.createElement('div');
+div.innerText = payment;
+parent.appendChild(div);
+
 }
 
 // Given an object of values (a value has amount, years and rate ),
